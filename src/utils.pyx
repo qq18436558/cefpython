@@ -8,22 +8,22 @@ include "cefpython.pyx"
 cimport cef_types
 
 TID_UI = cef_types.TID_UI
-TID_DB = cef_types.TID_DB
+TID_FILE_BACKGROUND = cef_types.TID_FILE_BACKGROUND
 TID_FILE = cef_types.TID_FILE
+TID_FILE_USER_VISIBLE = cef_types.TID_FILE_USER_VISIBLE
 TID_FILE_USER_BLOCKING = cef_types.TID_FILE_USER_BLOCKING
-TID_PROCESS_LAUNCHER = cef_types.TID_PROCESS_LAUNCHER
-TID_CACHE = cef_types.TID_CACHE
 TID_IO = cef_types.TID_IO
 TID_RENDERER = cef_types.TID_RENDERER
 
 g_browserProcessThreads = [
     TID_UI,
-    TID_DB,
+    TID_FILE_BACKGROUND,
     TID_FILE,
+    TID_FILE_USER_VISIBLE,
     TID_FILE_USER_BLOCKING,
-    TID_CACHE,
     TID_IO,
 ]
+
 
 cpdef py_bool IsString(object maybeString):
     # In Python 2.7 string types are: 1) str/bytes 2) unicode.

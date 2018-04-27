@@ -105,3 +105,14 @@ cdef class PyResponse:
             pair.first, pair.second = cefKey, cefValue
             cefHeaderMap.insert(pair)
         self.GetCefResponse().get().SetHeaderMap(cefHeaderMap)
+
+    cpdef str GetURL(self):
+        return CefToPyString(self.GetCefResponse().get().GetURL())
+
+    cpdef py_void SetURL(self, py_string url):
+        assert type(url) in (str, unicode, bytes), (
+                "Response.SetURL() failed: url param is not a string")
+        cdef CefString cefURL
+        PyToCefString(url, cefURL)
+        self.GetCefResponse().get().SetURL(cefURL)
+

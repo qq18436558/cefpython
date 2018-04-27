@@ -145,11 +145,10 @@ cdef extern from "include/internal/cef_types.h":
 
     ctypedef enum cef_thread_id_t:
         TID_UI,
-        TID_DB,
-        TID_FILE,
+        TID_FILE_BACKGROUND,
+        TID_FILE = TID_FILE_BACKGROUND,
+        TID_FILE_USER_VISIBLE,
         TID_FILE_USER_BLOCKING,
-        TID_PROCESS_LAUNCHER,
-        TID_CACHE,
         TID_IO,
         TID_RENDERER
 
@@ -191,6 +190,7 @@ cdef extern from "include/internal/cef_types.h":
         UR_FLAG_REPORT_UPLOAD_PROGRESS    = 1 << 3,
         UR_FLAG_NO_DOWNLOAD_DATA          = 1 << 4,
         UR_FLAG_NO_RETRY_ON_5XX           = 1 << 5,
+        UR_FLAG_STOP_ON_REDIRECT          = 1 << 6
 
     # CefListValue, CefDictionaryValue - types.
     ctypedef enum cef_value_type_t:

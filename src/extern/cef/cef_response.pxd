@@ -24,3 +24,5 @@ cdef extern from "include/cef_response.h":
         CefString GetHeader(CefString& name)
         void GetHeaderMap(CefResponseHeaderMap& headerMap)
         void SetHeaderMap(CefResponseHeaderMap& headerMap)
+        CefString GetURL()
+        void SetURL(CefString& url)
