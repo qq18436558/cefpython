@@ -94,8 +94,28 @@ cdef public cpp_bool KeyboardHandler_OnKeyEvent(
             if returnValue:
                 return bool(returnValue)
         if platform.system() == "Darwin":
-            # Handle copy: command + c
+            # Handle paste: command + a
             if pyEvent["modifiers"] == 128 \
+                    and pyEvent["native_key_code"] == 0:
+                pyBrowser.GetFocusedFrame().SelectAll()
+                return True
+            # Handle paste: shift + command + z
+            elif pyEvent["modifiers"] == 130 \
+                    and pyEvent["native_key_code"] == 6:
+                pyBrowser.GetFocusedFrame().Redo()
+                return True
+            # Handle paste: command + z
+            elif pyEvent["modifiers"] == 128 \
+                    and pyEvent["native_key_code"] == 6:
+                pyBrowser.GetFocusedFrame().Undo()
+                return True
+            # Handle paste: command + x
+            elif pyEvent["modifiers"] == 128 \
+                    and pyEvent["native_key_code"] == 7:
+                pyBrowser.GetFocusedFrame().Cut()
+                return True
+            # Handle copy: command + c
+            elif pyEvent["modifiers"] == 128 \
                     and pyEvent["native_key_code"] == 8:
                 pyBrowser.GetFocusedFrame().Copy()
                 return True
